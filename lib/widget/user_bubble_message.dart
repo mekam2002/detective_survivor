@@ -1,32 +1,25 @@
 import 'package:flutter/material.dart';
 
-class MessageBuble extends StatelessWidget {
-  const MessageBuble({
+class UserMessageBuble extends StatelessWidget {
+  const UserMessageBuble({
     super.key,
     required this.message,
-    required this.isMe,
   });
   final String message;
-  final bool isMe;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
-            color: isMe
-                ? Colors.grey[300]
-                : Theme.of(context).colorScheme.secondary,
-            borderRadius: BorderRadius.only(
-              topLeft: const Radius.circular(12),
-              topRight: const Radius.circular(12),
-              bottomLeft:
-                  !isMe ? const Radius.circular(0) : const Radius.circular(12),
-              bottomRight:
-                  isMe ? const Radius.circular(0) : const Radius.circular(12),
-            ),
+            color: Colors.grey[300],
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+                bottomLeft: Radius.circular(12),
+                bottomRight: Radius.circular(0)),
           ),
           width: 140,
           padding: const EdgeInsets.symmetric(

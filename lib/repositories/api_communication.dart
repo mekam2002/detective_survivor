@@ -24,7 +24,7 @@ void sendMessage(msg) async {
   }
 
   // Listen for any message from backend
-  channel?.stream.listen(
+  await channel?.stream.listen(
     (event) {
       debugPrint("waiting answer....");
 
@@ -35,6 +35,7 @@ void sendMessage(msg) async {
         // story.add(event);
 
         backendMessage = event;
+        frontendMessage = event;
 
         // Now only close the connection and we are done here!
         channel!.sink.close();

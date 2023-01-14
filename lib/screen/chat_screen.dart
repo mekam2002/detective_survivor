@@ -5,6 +5,7 @@ import '../constant/list.dart';
 import '../repositories/api_communication.dart';
 import '../widget/choice_container.dart';
 import '../widget/game_text_field.dart';
+import '../widget/user_bubble_message.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({
@@ -18,6 +19,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final ScrollController _scrollController = ScrollController();
   bool _isMe = false;
+  bool _firstPartie = true;
 
   _scrollToBottom() {
     _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
@@ -27,17 +29,12 @@ class _ChatScreenState extends State<ChatScreen> {
     switch (story[generalIndex]) {
       case 'choix':
         setState(() {
-          _isMe = true;
+          // _isMe = true;
         });
 
         break;
       default:
     }
-    // if (story[generalIndex] == 'choix') {
-    //   setState(() {
-    //     _isMe = !true;
-    //   });
-    // }
   }
 
   @override
@@ -73,13 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             onPressed: () {},
             icon: const Icon(
-              Icons.videocam,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.more_vert,
+              Icons.menu,
             ),
           ),
         ],
@@ -98,11 +89,12 @@ class _ChatScreenState extends State<ChatScreen> {
                       setState(() {
                         story.add(backendMessage);
                       });
+
                       _isAnswering();
                       sendMessage(backendMessage);
                     }
                   : () {
-                      story.add('maffff');
+                      print('yooooooooooooooooooooooooo');
                     },
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
@@ -110,10 +102,14 @@ class _ChatScreenState extends State<ChatScreen> {
                 itemCount: story.length,
                 itemBuilder: (context, index) {
                   generalIndex = index;
-                  return MessageBuble(
-                    isMe: _isMe,
-                    message: story[index].toString(),
-                  );
+                  return story[index] == "choix"
+                      ? UserMessageBuble(
+                          message: story[index],
+                        )
+                      : MessageBuble(
+                          isMe: false,
+                          message: story[index],
+                        );
                 },
               ),
             ),
