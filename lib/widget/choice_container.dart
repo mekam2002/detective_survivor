@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myliferpg/repositories/api_communication.dart';
 
 class ChoiceContainer extends StatelessWidget {
   const ChoiceContainer({
@@ -11,13 +12,17 @@ class ChoiceContainer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            sendMessage("choix 1");
+          },
           child: const Text(
             "Choix 1",
           ),
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            sendMessage("choix 2");
+          },
           child: const Text(
             "Choix 2",
           ),

@@ -17,6 +17,27 @@ class GameTextfield extends StatelessWidget {
         color: const Color.fromARGB(255, 138, 135, 135),
         borderRadius: BorderRadius.circular(20),
       ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: const [
+              Icon(Icons.emoji_emotions),
+              Text(
+                "Tap your Message",
+              ),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.horizontal_rule_outlined,
+              ),
+              Icon(Icons.mic_none_rounded),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

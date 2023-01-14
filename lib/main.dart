@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myliferpg/repositories/api_communication.dart';
-import 'package:web_socket_channel/io.dart';
 
 import 'screen/chat_screen.dart';
 

@@ -16,9 +16,38 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final ScrollController _scrollController = ScrollController();
+  bool _isMe = false;
+
+  _scrollToBottom() {
+    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+  }
+
+  _isAnswering() {
+    switch (story[generalIndex]) {
+      case 'choix':
+        setState(() {
+          _isMe = true;
+        });
+
+        break;
+      default:
+    }
+    // if (story[generalIndex] == 'choix') {
+    //   setState(() {
+    //     _isMe = !true;
+    //   });
+    // }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // String actualStory = story[index];
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
 
     return Scaffold(
       appBar: AppBar(
@@ -55,38 +84,43 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ],
       ),
-      body: GestureDetector(
-        onTap: () {
-          setState(() {
-            story.add(backendMessage);
-          });
-          sendMessage(backendMessage);
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Flexible(
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          Flexible(
+            child: GestureDetector(
+              onDoubleTap: null,
+              onSecondaryTap: null,
+              onTap: _isMe == false
+                  ? () {
+                      setState(() {
+                        story.add(backendMessage);
+                      });
+                      _isAnswering();
+                      sendMessage(backendMessage);
+                    }
+                  : () {
+                      story.add('maffff');
+                    },
               child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                controller: _scrollController,
                 itemCount: story.length,
                 itemBuilder: (context, index) {
-                  generalIndex = index + 1;
+                  generalIndex = index;
                   return MessageBuble(
-                    isMe: true,
+                    isMe: _isMe,
                     message: story[index].toString(),
                   );
                 },
               ),
             ),
-            if (story[generalIndex] == "choix")
-              const ChoiceContainer()
-            else
-              Container(),
-            const SizedBox(
-              height: 50,
-            ),
-            const GameTextfield(),
-          ],
-        ),
+          ),
+          _isMe ? const ChoiceContainer() : Container(),
+          const GameTextfield(),
+        ],
       ),
     );
   }

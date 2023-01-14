@@ -12,7 +12,7 @@ class MessageBuble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+      mainAxisAlignment: isMe ? MainAxisAlignment.start : MainAxisAlignment.end,
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
@@ -40,14 +40,7 @@ class MessageBuble extends StatelessWidget {
           child: Text(
             message,
             style: TextStyle(
-              color: isMe
-                  ? Colors.black
-                  : const Color.fromARGB(
-                      255,
-                      107,
-                      182,
-                      109,
-                    ),
+              color: isMe ? Colors.black : Color.fromARGB(255, 16, 19, 16),
             ),
           ),
         ),
